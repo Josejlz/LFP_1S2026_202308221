@@ -34,10 +34,18 @@ void ReportGenerator::parsearTokens(const std::vector<Token>& tokens) {
     int i = 0;
     int n = (int)tokens.size();
 
+    
+
     while (i < n) {
         std::string lex = tokens[i].lexeme;
 
-        // ── para pacientes
+        //para verificar si esta el hospital
+        if (lex == "HOSPITAL") {
+            i ++; 
+            continue;
+        } 
+
+        // para pacientes
         if (lex == "paciente" && i + 1 < n && tokens[i + 1].lexeme == ":") {
             Paciente p;
 			i += 2; // para saltar "paciente" y ":"
@@ -68,7 +76,7 @@ void ReportGenerator::parsearTokens(const std::vector<Token>& tokens) {
             pacientes.push_back(p);
         }
 
-        // ── para medicos
+        // para medicos
         else if (lex == "medico" && i + 1 < n && tokens[i + 1].lexeme == ":") {
             Medico m;
             i += 2;
@@ -94,7 +102,7 @@ void ReportGenerator::parsearTokens(const std::vector<Token>& tokens) {
             medicos.push_back(m);
         }
 
-        // ── para citas
+        //  para citas
         else if (lex == "cita" && i + 1 < n && tokens[i + 1].lexeme == ":") {
             Cita c;
             i += 2;
@@ -122,7 +130,7 @@ void ReportGenerator::parsearTokens(const std::vector<Token>& tokens) {
             citas.push_back(c);
         }
 
-		// ── para diagnostico
+		// para diagnostico
         else if (lex == "diagnostico" && i + 1 < n && tokens[i + 1].lexeme == ":") {
             Diagnostico d;
             i += 2;
@@ -507,28 +515,59 @@ void ReportGenerator::generateReporte4(const std::string& outputPath) {
 
 void ReportGenerator::generateGraphviz(const std::string& outputPath) {
     std::ostringstream dot;
-    dot << "digraph G {\n"
-        << "  node [shape=rectangle, style=filled, fillcolor=lightblue];\n";
+
+    dot << "digraph Hospital {\n";
+    dot << "rankdir=TB;\n";
+    dot << "node [shape=box, style=filled, fontname=\"Arial\"];\n";
+
+    // Hospital
+    dot << "H [label=\"" << Hospital 
+        << "\", fillcolor=lightblue, fontcolor=black, shape=ellipse];\n";
+
+    dot << "P [label=\"PACIENTES\", fillcolor=lightgreen];\n";
+    dot << "M [label=\"MEDICOS\", fillcolor=lightcoral];\n";
+    dot << "C [label=\"CITAS\", fillcolor=lightyellow];\n";
+    dot << "D [label=\"DIAGNOSTICOS\", fillcolor=lightgray];\n";
+
+    dot << "H -> P; H -> M; H -> C; H -> D;\n";
+
     // Pacientes
+    int i = 1;
     for (const auto& p : pacientes) {
-        dot << "  \"" << p.nombre << "\" [fillcolor=lightgreen];\n";
+        dot << "p" << i << " [label=\"" << p.nombre << "\", fillcolor=lightgreen];\n";
+        dot << "P -> p" << i << ";\n";
+        i++;
     }
+
     // Médicos
+    i = 1;
     for (const auto& m : medicos) {
-        dot << "  \"" << m.nombre << "\" [fillcolor=lightcoral];\n";
+        dot << "m" << i << " [label=\"" << m.nombre << "\", fillcolor=lightcoral];\n";
+        dot << "M -> m" << i << ";\n";
+        i++;
     }
+
     // Citas
     for (const auto& c : citas) {
-        dot << "  \"" << c.nombrePaciente << "\" -> \"" << c.nombreMedico
-            << "\" [label=\"Cita: " << c.fecha << " " << c.hora << "\"];\n";
+        dot << "\"" << c.nombrePaciente << "\" -> \"" << c.nombreMedico
+            << "\" [label=\"" << c.fecha << " " << c.hora 
+            << "\", style=dashed];\n";
     }
+
     // Diagnósticos
+    i = 1;
     for (const auto& d : diagnosticos) {
-        dot << "  \"" << d.nombrePaciente << "\" -> \"Diagnóstico: "
-            << d.condicion << "\\n" << d.medicamento << " / " << d.dosis
-            << "\" [style=dashed, color=gray];\n";
+        dot << "d" << i << " [label=\"" << d.condicion << "\\n"
+            << d.medicamento << " / " << d.dosis
+            << "\", fillcolor=lightgray];\n";
+
+        dot << "D -> d" << i << ";\n";
+        dot << "d" << i << " -> \"" << d.nombrePaciente << "\";\n";
+        i++;
     }
+
     dot << "}\n";
+
     escribirArchivo(outputPath, dot.str());
 }
 

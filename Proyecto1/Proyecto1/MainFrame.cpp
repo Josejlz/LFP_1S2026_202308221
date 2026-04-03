@@ -7,17 +7,20 @@
 #include "ReportGenerator.h"
 
 wxString filepath = "";
-LexicalAnalyzer* lexicalAnalyzer;
+LexicalAnalyzer *lexicalAnalyzer;
 
-void MainFrame::setLexicalAnalyzer(LexicalAnalyzer* la) {
+void MainFrame::setLexicalAnalyzer(LexicalAnalyzer *la)
+{
 	lexicalAnalyzer = la;
 };
 
-void MainFrame::setReportGenerator(ReportGenerator* rg) {
+void MainFrame::setReportGenerator(ReportGenerator *rg)
+{
 	reportGenerator = rg;
 }
 
-enum BTN_ID {
+enum BTN_ID
+{
 	LOAD_ID = 1,
 	GENREPORTES_ID = 2,
 	ANALYZE_ID = 3,
@@ -26,15 +29,15 @@ enum BTN_ID {
 };
 
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
-EVT_BUTTON(LOAD_ID, MainFrame::OnButtonLoadClicked)
-EVT_BUTTON(GENREPORTES_ID, MainFrame::OnButtonGenReportesClicked)
-EVT_BUTTON(ANALYZE_ID, MainFrame::OnButtonAnalyzeClicked)
+	EVT_BUTTON(LOAD_ID, MainFrame::OnButtonLoadClicked)
+	EVT_BUTTON(GENREPORTES_ID, MainFrame::OnButtonGenReportesClicked)
+	EVT_BUTTON(ANALYZE_ID, MainFrame::OnButtonAnalyzeClicked)
 wxEND_EVENT_TABLE()
 
+	MainFrame::MainFrame(const wxString &title) : wxFrame(nullptr, wxID_ANY, title)
+{
 
-MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) {
-
-	wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
+	wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
 
 	panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(-1, 350));
 
@@ -50,9 +53,9 @@ MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) 
 
 	scrolledWindow = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxHSCROLL | wxVSCROLL);
 	scrolledWindow->SetScrollRate(10, 10);
-	scrolledWindow->SetBackgroundColour(*wxLIGHT_GREY); //anotacion del area de dibujo
+	scrolledWindow->SetBackgroundColour(*wxLIGHT_GREY); // anotacion del area de dibujo
 
-	wxBoxSizer* imageSizer = new wxBoxSizer(wxVERTICAL);
+	wxBoxSizer *imageSizer = new wxBoxSizer(wxVERTICAL);
 	scrolledWindow->SetSizer(imageSizer);
 
 	// organizacion de los elementos
@@ -63,12 +66,12 @@ MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) 
 
 	wxInitAllImageHandlers();
 	image = nullptr;
-
 };
 
-void MainFrame::OnButtonLoadClicked(wxCommandEvent& evt) {
+void MainFrame::OnButtonLoadClicked(wxCommandEvent &evt)
+{
 	wxFileDialog openFileDialog(this, _("Open file"), "", "",
-		"MED files (*.med)|*.med", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+	"MED files (*.med)|*.med", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
 
 	if (openFileDialog.ShowModal() == wxID_CANCEL)
 		return; // si no se escogió nada
@@ -81,16 +84,17 @@ void MainFrame::OnButtonLoadClicked(wxCommandEvent& evt) {
 
 	if (filename.find(".med") != std::string::npos)
 	{
-
 	}
-	else {
+	else
+	{
 		wxLogMessage("El archivo no es valido, o no se selecciono uno.");
 		return;
 	}
 
 	std::ifstream archivo(filename);
 
-	if (!archivo.is_open()) {
+	if (!archivo.is_open())
+	{
 		wxLogMessage("No se pudo abrir el archivo");
 		return;
 	}
@@ -101,93 +105,91 @@ void MainFrame::OnButtonLoadClicked(wxCommandEvent& evt) {
 	wxString contenido = buffer.str();
 
 	textArea->SetValue(wxString(buffer.str().c_str(), wxConvUTF8));
-
 };
 
-void MainFrame::OnButtonAnalyzeClicked(wxCommandEvent& evt) {
-	
-	if (lexicalAnalyzer != nullptr) {
+void MainFrame::OnButtonAnalyzeClicked(wxCommandEvent &evt)
+{
+
+	if (lexicalAnalyzer != nullptr)
+	{
 		lexicalAnalyzer->nextToken(filepath);
 
 		textArea->SetValue("");
 		textArea->SetValue("TOKENS ENCONTRADOS \n\n");
 
-		for (const auto& token : lexicalAnalyzer->tokens) {
-			
+		for (const auto &token : lexicalAnalyzer->tokens)
+		{
+
 			textArea->AppendText(wxString::Format("Token: %s, Lexema: %s, Linea: %d, Columna: %d\n",
-				token.getTypeString(), token.lexeme, token.line, token.column));
+			token.getTypeString(), token.lexeme, token.line, token.column));
 		}
 
 		textArea->AppendText("ERRORES ENCONTRADOS \n\n");
 
-		for (const auto& error : lexicalAnalyzer->errorManager->getErrores()) {
+		for (const auto &error : lexicalAnalyzer->errorManager->getErrores())
+		{
 			wxString errorMsg = wxString::Format("Error: %s, Linea: %d, Columna: %d, Gravedad: %s, Descripcion: %s\n",
-				wxString::FromUTF8(error.getStringTipoError().c_str()),
-				error.line,
-				error.column,
-				wxString::FromUTF8(error.getStringGravedad().c_str()),
-				wxString::FromUTF8(error.description.c_str())
-			);
+			wxString::FromUTF8(error.getStringTipoError().c_str()), error.line, error.column, wxString::FromUTF8(error.getStringGravedad().c_str()),
+			wxString::FromUTF8(error.description.c_str()));
 			textArea->AppendText(errorMsg);
 		}
-
-
-
 	}
-
-
-	
 };
 
+void MainFrame::OnButtonGenReportesClicked(wxCommandEvent &evt)
+{
 
-
-void MainFrame::OnButtonGenReportesClicked(wxCommandEvent& evt) {
-
-	if (lexicalAnalyzer->getTokens().empty()) {
+	if (lexicalAnalyzer->getTokens().empty())
+	{
 		wxMessageBox("No hay tokens para generar reportes.", "Aviso", wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 
-	// Generación de archivos
 	reportGenerator->setTokens(lexicalAnalyzer->getTokens());
 	reportGenerator->setErrors(lexicalAnalyzer->errorManager->getErrores());
 	reportGenerator->parsearTokens(lexicalAnalyzer->getTokens());
 	reportGenerator->cruzarDatos();
+	reportGenerator->Hospital  = filepath.ToStdString();
 	reportGenerator->generateReporte1("reporte1_pacientes.html");
 	reportGenerator->generateReporte2("reporte2_medicos.html");
 	reportGenerator->generateReporte3("reporte3_citas.html");
 	reportGenerator->generateReporte4("reporte4_estadistico.html");
 
 	// Generar el archivo .dot
-	reportGenerator->generateGraphviz("graphviz.dot");
+	reportGenerator->generateGraphviz("hospital.dot");
 
 	// dot a png
-	wxString comando = "dot -Tpng graphviz.dot -o graphviz.png";
-	if (wxExecute(comando, wxEXEC_SYNC) != -1) {
-		
-		setImage("graphviz.png");
+	wxString comando = "dot -Tpng hospital.dot -o hospital.png";
+	if (wxExecute(comando, wxEXEC_SYNC) != -1)
+	{
+
+		setImage("hospital.png");
 	}
-	else {
-		wxLogError("No se encontró Graphviz (dot). Asegúrate de tenerlo instalado y en el PATH.");
+	else
+	{
+		wxLogError("Error al procesar el diagrama.");
 	}
-	
 };
 
-void MainFrame::setImage(const wxString& imagePath) {
+void MainFrame::setImage(const wxString &imagePath)
+{
 	wxImage imagen;
-	if (!imagen.LoadFile(imagePath, wxBITMAP_TYPE_PNG)) {
+	if (!imagen.LoadFile(imagePath, wxBITMAP_TYPE_PNG))
+	{
 		return;
 	}
 
 	wxBitmap bitmap(imagen);
 
-	if (image == nullptr) {
-		// creacion de
+	if (image == nullptr)
+	{
+		// creacion sino esta
 		image = new wxStaticBitmap(scrolledWindow, wxID_ANY, bitmap);
 		scrolledWindow->GetSizer()->Add(image, 0, wxALIGN_CENTER | wxALL, 10);
 	}
-	else {
-		// Si ya existe, solo actualizamos la imagen
+	else
+	{
+		// actualizacion
 		image->SetBitmap(bitmap);
 	}
 

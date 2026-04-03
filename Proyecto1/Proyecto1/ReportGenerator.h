@@ -4,6 +4,7 @@
 #include "Token.h"
 #include "ErrorToken.h"
 
+
 struct Paciente {
     std::string nombre;
     int edad = 0;
@@ -52,6 +53,7 @@ class ReportGenerator
 public:
 
 	ReportGenerator();
+    std::string Hospital = "";
     void generateReporte1(const std::string& outputPath);
     void generateReporte2(const std::string& outputPath);
     void generateReporte3(const std::string& outputPath);
