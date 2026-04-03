@@ -1,0 +1,26 @@
+﻿#include "Token.h"
+#include <string>
+
+Token::Token(TokenType type, std::string lexeme, int line, int column) {
+	this->type = type;
+	this->lexeme = lexeme;
+	this->line = line;
+	this->column = column;
+}
+
+
+std::string Token::getTypeString() const {
+	switch (type) {
+	case TokenType::IDENTIFICADOR: return "IDENTIFICADOR";
+	case TokenType::RESERVADA: return "RESERVADA";
+	case TokenType::CODIGO_ID: return "CODIGO_ID";
+	case TokenType::LITERAL_FECHA: return "LITERAL_FECHA";
+	case TokenType::LITERAL_HORA: return "LITERAL_HORA";
+	case TokenType::LITERAL_INTEGER: return "LITERAL_NUMERO";
+	case TokenType::LITERAL_STRING: return "TEXTO";
+	case TokenType::ENUM_VAL: return "ENUM_VAL";
+	case TokenType::TIPO_SANGRE: return "TIPO_SANGRE";
+	case TokenType::DELIMITADOR: return "DELIMITADOR";
+	default: return "DESCONOCIDO";
+	}
+}

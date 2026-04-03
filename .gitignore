@@ -1,0 +1,10 @@
+ # Visual Studio
+   .vs/
+   x64/
+   Debug/
+   Release/
+   *.ilk
+   *.pdb
+   *.ipch
+   *.db
+   .sln.DotSettings.user

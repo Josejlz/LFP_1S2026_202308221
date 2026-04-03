@@ -1,0 +1,24 @@
+HOSPITAL { 
+PACIENTES { 
+paciente: "María García" [edad: 45, tipo_sangre: "A+", habitacion: 
+302], 
+paciente: "Carlos Mendoza" [edad: 62, tipo_sangre: "O-", habitacion: 
+410], 
+}; 
+MEDICOS { 
+medico: "Dr. Roberto Juárez" [especialidad: CARDIOLOGIA, codigo: 
+"MED-001"], 
+medico: "Dra. Ana Solís" [especialidad: NEUROLOGIA, codigo: 
+"MED-002"], 
+}; 
+CITAS { 
+cita: "María García" con "Dr. Roberto Juárez" [fecha: 2025-04-10, 
+hora: 09:00], 
+cita: "Carlos Mendoza" con "Dra. Ana Solís" [fecha: 2025-04-10, 
+hora: 11:30], 
+}; 
+DIAGNOSTICOS { 
+diagnostico: "María García" [condicion: "Hipertensión Arterial", 
+medicamento: "Losartán 50mg", dosis: DIARIA], 
+}; 
+};

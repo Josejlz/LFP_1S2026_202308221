@@ -1,0 +1,27 @@
+﻿#pragma once
+#include <string>
+
+enum TokenType {
+    IDENTIFICADOR, // Identificadores
+    RESERVADA,     // Palabras reservadas
+    CODIGO_ID,     // Codigos con guion
+    LITERAL_FECHA,         // ps fecha jsjs
+    LITERAL_HORA,          // sardinas... no, hora
+    LITERAL_INTEGER,       // Enteros
+    LITERAL_STRING,        // Cadena de texto
+    ENUM_VAL,      // Enumeraciones de especialidad y dosis
+    TIPO_SANGRE,   // Tipos de sangre restringidos
+    DELIMITADOR    // Delimitadores {}, [], () ... 
+};
+
+class Token {
+public:
+    TokenType type;
+    std::string lexeme;
+    int line;
+    int column;
+
+    Token(TokenType type, std::string lexeme, int line, int column);
+
+    std::string getTypeString() const;  // tostring del tokentype
+};

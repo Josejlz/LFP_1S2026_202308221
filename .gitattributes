@@ -1,0 +1,4 @@
+Proyecto1/.vs/Proyecto1.slnx/v18/ipch/**/*.ipch filter=lfs diff=lfs merge=lfs -text
+Proyecto1/x64/Debug/*.pdb filter=lfs diff=lfs merge=lfs -text
+Proyecto1/Proyecto1/x64/Debug/*.ilk filter=lfs diff=lfs merge=lfs -text
+Proyecto1/.vs/Proyecto1.slnx/v18/*.db filter=lfs diff=lfs merge=lfs -text
