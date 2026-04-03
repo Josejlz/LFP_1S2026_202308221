@@ -21,6 +21,10 @@ private:
 
 	wxTextCtrl* textArea;
 
+	wxStaticBitmap* image = nullptr;
+
+	wxScrolledWindow* scrolledWindow = nullptr;
+
 	void OnButtonLoadClicked(wxCommandEvent& evt);
 	void OnButtonGenReportesClicked(wxCommandEvent& evt);
 	void OnButtonAnalyzeClicked(wxCommandEvent& evt);

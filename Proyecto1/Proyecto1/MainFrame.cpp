@@ -4,6 +4,7 @@
 #include <wx/wx.h>
 #include <string>
 #include "LexicalAnalyzer.h"
+#include "ReportGenerator.h"
 
 wxString filepath = "";
 LexicalAnalyzer* lexicalAnalyzer;
@@ -33,7 +34,9 @@ wxEND_EVENT_TABLE()
 
 MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) {
 
-	panel = new wxPanel(this);
+	wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
+
+	panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(-1, 350));
 
 	btnLoad = new wxButton(panel, LOAD_ID, "Cargar archivo", wxPoint(155, 50), wxSize(150, 50));
 
@@ -42,6 +45,25 @@ MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) 
 	btnAnalyze = new wxButton(panel, ANALYZE_ID, "Analizar", wxPoint(495, 50), wxSize(150, 50));
 
 	textArea = new wxTextCtrl(panel, TEXTAREA_ID, "", wxPoint(50, 120), wxSize(700, 200), wxTE_MULTILINE | wxTE_RICH);
+
+	wxInitAllImageHandlers();
+
+	scrolledWindow = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxHSCROLL | wxVSCROLL);
+	scrolledWindow->SetScrollRate(10, 10);
+	scrolledWindow->SetBackgroundColour(*wxLIGHT_GREY); //anotacion del area de dibujo
+
+	wxBoxSizer* imageSizer = new wxBoxSizer(wxVERTICAL);
+	scrolledWindow->SetSizer(imageSizer);
+
+	// organizacion de los elementos
+	mainSizer->Add(panel, 0, wxEXPAND | wxALL, 5);
+	mainSizer->Add(scrolledWindow, 1, wxEXPAND | wxALL, 5); // El 1 hace que use el resto del espacio
+
+	this->SetSizer(mainSizer);
+
+	wxInitAllImageHandlers();
+	image = nullptr;
+
 };
 
 void MainFrame::OnButtonLoadClicked(wxCommandEvent& evt) {
@@ -121,11 +143,12 @@ void MainFrame::OnButtonAnalyzeClicked(wxCommandEvent& evt) {
 
 void MainFrame::OnButtonGenReportesClicked(wxCommandEvent& evt) {
 
-	if (lexicalAnalyzer->tokens.size()==0)
-	{
+	if (lexicalAnalyzer->getTokens().empty()) {
+		wxMessageBox("No hay tokens para generar reportes.", "Aviso", wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 
+	// Generación de archivos
 	reportGenerator->setTokens(lexicalAnalyzer->getTokens());
 	reportGenerator->setErrors(lexicalAnalyzer->errorManager->getErrores());
 	reportGenerator->parsearTokens(lexicalAnalyzer->getTokens());
@@ -134,11 +157,41 @@ void MainFrame::OnButtonGenReportesClicked(wxCommandEvent& evt) {
 	reportGenerator->generateReporte2("reporte2_medicos.html");
 	reportGenerator->generateReporte3("reporte3_citas.html");
 	reportGenerator->generateReporte4("reporte4_estadistico.html");
+
+	// Generar el archivo .dot
+	reportGenerator->generateGraphviz("graphviz.dot");
+
+	// dot a png
+	wxString comando = "dot -Tpng graphviz.dot -o graphviz.png";
+	if (wxExecute(comando, wxEXEC_SYNC) != -1) {
+		
+		setImage("graphviz.png");
+	}
+	else {
+		wxLogError("No se encontró Graphviz (dot). Asegúrate de tenerlo instalado y en el PATH.");
+	}
 	
 };
 
 void MainFrame::setImage(const wxString& imagePath) {
-	
-	
-};
+	wxImage imagen;
+	if (!imagen.LoadFile(imagePath, wxBITMAP_TYPE_PNG)) {
+		return;
+	}
 
+	wxBitmap bitmap(imagen);
+
+	if (image == nullptr) {
+		// creacion de
+		image = new wxStaticBitmap(scrolledWindow, wxID_ANY, bitmap);
+		scrolledWindow->GetSizer()->Add(image, 0, wxALIGN_CENTER | wxALL, 10);
+	}
+	else {
+		// Si ya existe, solo actualizamos la imagen
+		image->SetBitmap(bitmap);
+	}
+
+	// para actuallizar el scroll
+	scrolledWindow->FitInside();
+	scrolledWindow->Layout();
+}

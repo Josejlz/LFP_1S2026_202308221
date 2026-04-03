@@ -66,5 +66,7 @@ public:
 
     std::string htmlHeader(const std::string& titulo, const std::string& extraCSS = "");
     void escribirArchivo(const std::string& path, const std::string& contenido);
+
+	void graphvizToPNG(std::string& nombreArchivo);
 };
 

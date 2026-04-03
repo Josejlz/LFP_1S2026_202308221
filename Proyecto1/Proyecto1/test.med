@@ -1,24 +1,53 @@
-HOSPITAL { 
-PACIENTES { 
-paciente: "María García" [edad: 45, tipo_sangre: "A+", habitacion: 
-302], 
-paciente: "Carlos Mendoza" [edad: 62, tipo_sangre: "O-", habitacion: 
-410], 
-}; 
-MEDICOS { 
-medico: "Dr. Roberto Juárez" [especialidad: CARDIOLOGIA, codigo: 
-"MED-001"], 
-medico: "Dra. Ana Solís" [especialidad: NEUROLOGIA, codigo: 
-"MED-002"], 
-}; 
-CITAS { 
-cita: "María García" con "Dr. Roberto Juárez" [fecha: 2025-04-10, 
-hora: 09:00], 
-cita: "Carlos Mendoza" con "Dra. Ana Solís" [fecha: 2025-04-10, 
-hora: 11:30], 
-}; 
-DIAGNOSTICOS { 
-diagnostico: "María García" [condicion: "Hipertensión Arterial", 
-medicamento: "Losartán 50mg", dosis: DIARIA], 
-}; 
-};
+HOSPITAL {
+    PACIENTES {
+        paciente: "Elena Rodriguez" [edad: 28, tipo_sangre: "O+", habitacion: 101],
+        paciente: "Ricardo Mendez" [edad: 55, tipo_sangre: "A-", habitacion: 102],
+        paciente: "Sofia Martinez" [edad: 34, tipo_sangre: "B+", habitacion: 201],
+        paciente: "Julian Castro" [edad: 72, tipo_sangre: "AB-", habitacion: 305],
+        paciente: "Lucia Fernandez" [edad: 42, tipo_sangre: "O-", habitacion: 202],
+        paciente: "Mateo Salazar" [edad: 19, tipo_sangre: "A+", habitacion: 105],
+        paciente: "Valeria Gomez" [edad: 61, tipo_sangre: "B-", habitacion: 401],
+        paciente: "Andres Pineda" [edad: 50, tipo_sangre: "O+", habitacion: 402],
+        paciente: "Camila Ruiz" [edad: 24, tipo_sangre: "AB+", habitacion: 205],
+        paciente: "Fernando Soto" [edad: 68, tipo_sangre: "A-", habitacion: 308],
+        paciente: "Isabela Rios" [edad: 31, tipo_sangre: "B+", habitacion: 110],
+        paciente: "Humberto Vega" [edad: 80, tipo_sangre: "O+", habitacion: 501]
+    };
+
+    MEDICOS {
+        medico: "Dr. Roberto Juarez" [especialidad: CARDIOLOGIA, codigo: "MED-001"],
+        medico: "Dra. Ana Solis" [especialidad: NEUROLOGIA, codigo: "MED-002"],
+        medico: "Dr. Luis Herrera" [especialidad: PEDIATRIA, codigo: "MED-003"],
+        medico: "Dra. Carmen Vega" [especialidad: CIRUGIA, codigo: "MED-004"],
+        medico: "Dr. Sergio Peña" [especialidad: MEDICINA_GENERAL, codigo: "MED-005"],
+        medico: "Dra. Laura Meza" [especialidad: ONCOLOGIA, codigo: "MED-006"]
+    };
+
+    CITAS {
+        cita: "Elena Rodriguez" con "Dr. Roberto Juarez" [fecha: 2026-04-10, hora: 08:00],
+        cita: "Ricardo Mendez" con "Dra. Ana Solis" [fecha: 2026-04-10, hora: 09:30],
+        cita: "Sofia Martinez" con "Dr. Luis Herrera" [fecha: 2026-04-10, hora: 10:00],
+        
+        // Conflicto de horario intencional para prueba de reporte
+        cita: "Julian Castro" con "Dr. Roberto Juarez" [fecha: 2026-04-10, hora: 08:00],
+        
+        cita: "Lucia Fernandez" con "Dra. Carmen Vega" [fecha: 2026-04-11, hora: 07:00],
+        cita: "Mateo Salazar" con "Dr. Sergio Peña" [fecha: 2026-04-11, hora: 11:00],
+        cita: "Valeria Gomez" con "Dra. Laura Meza" [fecha: 2026-04-11, hora: 14:30],
+        cita: "Andres Pineda" [fecha: 2026-04-12, hora: 09:00] con "Dr. Roberto Juarez",
+        cita: "Camila Ruiz" con "Dra. Ana Solis" [fecha: 2026-04-12, hora: 10:00],
+        cita: "Fernando Soto" con "Dra. Carmen Vega" [fecha: 2026-04-12, hora: 08:00],
+        cita: "Isabela Rios" con "Dr. Sergio Peña" [fecha: 2026-04-13, hora: 16:00],
+        cita: "Humberto Vega" con "Dra. Laura Meza" [fecha: 2026-04-13, hora: 11:00]
+    };
+
+    DIAGNOSTICOS {
+        diagnostico: "Elena Rodriguez" [condicion: "Arritmia Leve", medicamento: "Propafenona 150mg", dosis: CADA_8_HORAS],
+        diagnostico: "Ricardo Mendez" [condicion: "Migraña Crónica", medicamento: "Sumatriptán 50mg", dosis: DIARIA],
+        diagnostico: "Julian Castro" [condicion: "Insuficiencia Cardiaca", medicamento: "Furosemida 40mg", dosis: DIARIA],
+        diagnostico: "Lucia Fernandez" [condicion: "Apendicitis", medicamento: "Cefalexina 500mg", dosis: CADA_12_HORAS],
+        diagnostico: "Valeria Gomez" [condicion: "Carcinoma", medicamento: "Tamoxifeno 20mg", dosis: SEMANAL],
+        diagnostico: "Humberto Vega" [condicion: "Hipertensión", medicamento: "Losartan 50mg", dosis: DIARIA]
+        // Algunos pacientes quedan sin diagnostico para probar el estado 'SIN DIAG.' en reportes
+    };
+}

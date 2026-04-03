@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <set>
 #include <map>
+#include <cstdlib>
 
 ReportGenerator::ReportGenerator() {
 }
@@ -23,10 +24,9 @@ void ReportGenerator::escribirArchivo(const std::string& path, const std::string
     if (archivo.is_open()) {
         archivo << contenido;
         archivo.close();
-        std::cout << "Reporte generado con exito en: " << path << std::endl;
+        
     }
     else {
-        std::cerr << "Error: No se pudo abrir el archivo para escribir en: " << path << std::endl;
     }
 }
 
@@ -122,7 +122,7 @@ void ReportGenerator::parsearTokens(const std::vector<Token>& tokens) {
             citas.push_back(c);
         }
 
-		// ── para diagnostico ─────────────────────────────────────────
+		// ── para diagnostico
         else if (lex == "diagnostico" && i + 1 < n && tokens[i + 1].lexeme == ":") {
             Diagnostico d;
             i += 2;
@@ -503,5 +503,40 @@ void ReportGenerator::generateReporte4(const std::string& outputPath) {
     html << "</tbody></table>";
 	html << "</body></html>";
     escribirArchivo(outputPath, html.str());
+};
+
+void ReportGenerator::generateGraphviz(const std::string& outputPath) {
+    std::ostringstream dot;
+    dot << "digraph G {\n"
+        << "  node [shape=rectangle, style=filled, fillcolor=lightblue];\n";
+    // Pacientes
+    for (const auto& p : pacientes) {
+        dot << "  \"" << p.nombre << "\" [fillcolor=lightgreen];\n";
+    }
+    // Médicos
+    for (const auto& m : medicos) {
+        dot << "  \"" << m.nombre << "\" [fillcolor=lightcoral];\n";
+    }
+    // Citas
+    for (const auto& c : citas) {
+        dot << "  \"" << c.nombrePaciente << "\" -> \"" << c.nombreMedico
+            << "\" [label=\"Cita: " << c.fecha << " " << c.hora << "\"];\n";
+    }
+    // Diagnósticos
+    for (const auto& d : diagnosticos) {
+        dot << "  \"" << d.nombrePaciente << "\" -> \"Diagnóstico: "
+            << d.condicion << "\\n" << d.medicamento << " / " << d.dosis
+            << "\" [style=dashed, color=gray];\n";
+    }
+    dot << "}\n";
+    escribirArchivo(outputPath, dot.str());
+}
+
+void ReportGenerator::graphvizToPNG(std::string& nombreArchivo) {
+    std::string command = "dot -Tpng " + nombreArchivo + ".dot -o " + nombreArchivo + ".png";
+    int result = system(command.c_str());
+    if (result != 0) {
+        std::cerr << "Error al ejecutar Graphviz. Asegúrate de que 'dot' esté en tu PATH." << std::endl;
+    }
 }
 
