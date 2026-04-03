@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Historial de Pacientes</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; padding: 24px;
+         background: #f5f5f5; color: #333; }
+  h1   { color: #1a4731; border-bottom: 3px solid #1a4731;
+         padding-bottom: 8px; }
+  h2   { color: #2e7d52; margin-top: 32px; }
+  table{ width: 100%; border-collapse: collapse; background: #fff;
+         border-radius: 8px; overflow: hidden;
+         box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  th   { background: #1a4731; color: #fff; padding: 12px 16px;
+         text-align: left; font-size: 14px; }
+  td   { padding: 10px 16px; border-bottom: 1px solid #eee;
+         font-size: 14px; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td      { background: #f9f9f9; }
+  .badge { padding: 4px 10px; border-radius: 12px; font-weight: bold;
+           font-size: 12px; display: inline-block; }
+  .verde   { background: #d4edda; color: #155724; }
+  .naranja { background: #fff3cd; color: #856404; }
+  .rojo    { background: #f8d7da; color: #721c24; }
+  .azul    { background: #cce5ff; color: #004085; }
+
+</style>
+</head>
+<body>
+<h1>MedLexer — Historial de Pacientes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Paciente</th><th>Edad</th><th>Sangre</th>
+      <th>Diagnóstico activo</th><th>Medicamento / Dosis</th><th>Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr><td>María García</td><td>45</td><td>A+</td><td>Hipertensión Arterial</td><td>Losartán 50mg / DIARIA</td><td><span class='badge verde'>ACTIVO</span></td></tr>
+<tr><td>Carlos Mendoza</td><td>62</td><td>O-</td><td><em>Sin diagnóstico registrado</em></td><td>—</td><td><span class='badge naranja'>SIN DIAG.</span></td></tr>
+</tbody></table></body></html>

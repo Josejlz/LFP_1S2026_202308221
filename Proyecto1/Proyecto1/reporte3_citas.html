@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Agenda de Citas</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; padding: 24px;
+         background: #f5f5f5; color: #333; }
+  h1   { color: #1a4731; border-bottom: 3px solid #1a4731;
+         padding-bottom: 8px; }
+  h2   { color: #2e7d52; margin-top: 32px; }
+  table{ width: 100%; border-collapse: collapse; background: #fff;
+         border-radius: 8px; overflow: hidden;
+         box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  th   { background: #1a4731; color: #fff; padding: 12px 16px;
+         text-align: left; font-size: 14px; }
+  td   { padding: 10px 16px; border-bottom: 1px solid #eee;
+         font-size: 14px; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td      { background: #f9f9f9; }
+  .badge { padding: 4px 10px; border-radius: 12px; font-weight: bold;
+           font-size: 12px; display: inline-block; }
+  .verde   { background: #d4edda; color: #155724; }
+  .naranja { background: #fff3cd; color: #856404; }
+  .rojo    { background: #f8d7da; color: #721c24; }
+  .azul    { background: #cce5ff; color: #004085; }
+
+  .conflicto td { background: #f8d7da !important; }
+  .pendiente td { background: #fff3cd !important; }
+
+</style>
+</head>
+<body>
+<h1>MedLexer — Agenda de Citas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fecha</th><th>Hora</th><th>Paciente</th>
+      <th>Médico</th><th>Especialidad</th><th>Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr class=''><td>2025-04-10</td><td>09:00</td><td>María García</td><td>Dr. Roberto Juárez</td><td>CARDIOLOGIA</td><td><span class='badge verde'>CONFIRMADA</span></td></tr>
+<tr class=''><td>2025-04-10</td><td>11:30</td><td>Carlos Mendoza</td><td>Dra. Ana Solís</td><td>NEUROLOGIA</td><td><span class='badge verde'>CONFIRMADA</span></td></tr>
+</tbody></table></body></html>

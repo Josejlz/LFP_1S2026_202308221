@@ -2,6 +2,7 @@
 #include "MainFrame.h"
 #include <wx/wx.h>
 #include "LexicalAnalyzer.h"
+#include "ReportGenerator.h"
 
 bool App :: OnInit() {
 	MainFrame* mainFrame = new MainFrame("MedLexer");
@@ -9,6 +10,7 @@ bool App :: OnInit() {
 	mainFrame->Center();
 	mainFrame->Show();
 	mainFrame->setLexicalAnalyzer(new LexicalAnalyzer());
+	mainFrame->setReportGenerator(new ReportGenerator());
 	return true;
 }
 

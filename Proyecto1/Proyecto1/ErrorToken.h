@@ -34,9 +34,7 @@ public:
 
 	std::string getStringTipoError() const;
 
-
-
-
 	
+
 };
 

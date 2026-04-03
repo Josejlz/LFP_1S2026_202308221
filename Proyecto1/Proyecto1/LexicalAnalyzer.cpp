@@ -10,6 +10,10 @@
 #include <vector>
 #include <string>
 
+std::vector<Token> LexicalAnalyzer::getTokens() {
+    return tokens;
+};
+
 
 LexicalAnalyzer::LexicalAnalyzer() {
 	pos = 0;
@@ -158,7 +162,6 @@ void LexicalAnalyzer::nextToken(wxString filepath) {
                 break;
             }
             if (c == '\0') {
-                tokens.push_back(Token(TokenTypes::TOKEN_EOF, "EOF", line, col));
                 return;
             }
             if (static_cast<unsigned char>(c) > 127) {

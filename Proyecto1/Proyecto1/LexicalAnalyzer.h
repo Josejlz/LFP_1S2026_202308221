@@ -32,6 +32,8 @@ class ErrorManager;
         vector<Token> tokens;
 		ErrorManager* errorManager;
 
+        vector<Token> getTokens();
+
 
 };
 

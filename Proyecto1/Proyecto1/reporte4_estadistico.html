@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Estadístico General</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; padding: 24px;
+         background: #f5f5f5; color: #333; }
+  h1   { color: #1a4731; border-bottom: 3px solid #1a4731;
+         padding-bottom: 8px; }
+  h2   { color: #2e7d52; margin-top: 32px; }
+  table{ width: 100%; border-collapse: collapse; background: #fff;
+         border-radius: 8px; overflow: hidden;
+         box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  th   { background: #1a4731; color: #fff; padding: 12px 16px;
+         text-align: left; font-size: 14px; }
+  td   { padding: 10px 16px; border-bottom: 1px solid #eee;
+         font-size: 14px; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td      { background: #f9f9f9; }
+  .badge { padding: 4px 10px; border-radius: 12px; font-weight: bold;
+           font-size: 12px; display: inline-block; }
+  .verde   { background: #d4edda; color: #155724; }
+  .naranja { background: #fff3cd; color: #856404; }
+  .rojo    { background: #f8d7da; color: #721c24; }
+  .azul    { background: #cce5ff; color: #004085; }
+
+  .kpi-grid { display: grid; grid-template-columns: repeat(2,1fr);
+              gap: 16px; margin: 16px 0 32px; }
+  .kpi-card { background: #fff; border-radius: 8px; padding: 16px 20px;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+              border-left: 4px solid #1a4731; }
+  .kpi-label { font-size: 13px; color: #666; margin-bottom: 4px; }
+  .kpi-value { font-size: 22px; font-weight: bold; color: #1a4731; }
+  .barra-bg  { background: #e0e0e0; border-radius: 4px;
+               height: 14px; width: 100%; }
+  .barra-fg  { background: #1a4731; border-radius: 4px; height: 14px; }
+  .barra-rojo { background: #dc3545; }
+
+</style>
+</head>
+<body>
+<h1>MedLexer — Estadístico General</h1>
+<h2>Sección A — Indicadores clave</h2>
+<div class='kpi-grid'>
+<div class='kpi-card'><div class='kpi-label'>Total de pacientes</div><div class='kpi-value'>2</div></div>
+<div class='kpi-card'><div class='kpi-label'>Total de médicos</div><div class='kpi-value'>2</div></div>
+<div class='kpi-card'><div class='kpi-label'>Total de citas</div><div class='kpi-value'>2</div></div>
+<div class='kpi-card'><div class='kpi-label'>Citas con conflicto</div><div class='kpi-value'>0 ⚠</div></div>
+<div class='kpi-card'><div class='kpi-label'>Pacientes con diagnóstico</div><div class='kpi-value'>1 de 2 (50%)</div></div>
+<div class='kpi-card'><div class='kpi-label'>Medicamento más prescrito</div><div class='kpi-value'>Losartán 50mg (1 pacientes)</div></div>
+<div class='kpi-card'><div class='kpi-label'>Especialidad con mayor carga</div><div class='kpi-value'>CARDIOLOGIA — Dr. Roberto Juárez</div></div>
+<div class='kpi-card'><div class='kpi-label'>Promedio de edad</div><div class='kpi-value'>53.5 años</div></div>
+</div>
+<h2>Sección B — Distribución de carga por especialidad</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Especialidad</th><th>Médicos</th>
+      <th>Citas</th><th>Pacientes</th><th>Ocupación</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr><td><strong>CARDIOLOGIA</strong></td><td>1</td><td>1</td><td>1</td><td style='width:200px'><div class='barra-bg'><div class='barra-fg ' style='width:50%'></div></div> <small>50%</small></td></tr>
+<tr><td><strong>NEUROLOGIA</strong></td><td>1</td><td>1</td><td>1</td><td style='width:200px'><div class='barra-bg'><div class='barra-fg ' style='width:50%'></div></div> <small>50%</small></td></tr>
+</tbody></table></body></html>

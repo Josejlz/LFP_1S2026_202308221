@@ -12,6 +12,10 @@ void MainFrame::setLexicalAnalyzer(LexicalAnalyzer* la) {
 	lexicalAnalyzer = la;
 };
 
+void MainFrame::setReportGenerator(ReportGenerator* rg) {
+	reportGenerator = rg;
+}
+
 enum BTN_ID {
 	LOAD_ID = 1,
 	GENREPORTES_ID = 2,
@@ -38,8 +42,6 @@ MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) 
 	btnAnalyze = new wxButton(panel, ANALYZE_ID, "Analizar", wxPoint(495, 50), wxSize(150, 50));
 
 	textArea = new wxTextCtrl(panel, TEXTAREA_ID, "", wxPoint(50, 120), wxSize(700, 200), wxTE_MULTILINE | wxTE_RICH);
-
-	pngHandler = new wxpngHandler(panel, PNGHANDLER_ID, wxPoint(50, 350), wxSize(700, 200));
 };
 
 void MainFrame::OnButtonLoadClicked(wxCommandEvent& evt) {
@@ -116,8 +118,26 @@ void MainFrame::OnButtonAnalyzeClicked(wxCommandEvent& evt) {
 };
 
 
+
 void MainFrame::OnButtonGenReportesClicked(wxCommandEvent& evt) {
 
+	if (lexicalAnalyzer->tokens.size()==0)
+	{
+		return;
+	}
+
+	reportGenerator->setTokens(lexicalAnalyzer->getTokens());
+	reportGenerator->setErrors(lexicalAnalyzer->errorManager->getErrores());
+	reportGenerator->parsearTokens(lexicalAnalyzer->getTokens());
+	reportGenerator->cruzarDatos();
+	reportGenerator->generateReporte1("reporte1_pacientes.html");
+	reportGenerator->generateReporte2("reporte2_medicos.html");
+	reportGenerator->generateReporte3("reporte3_citas.html");
+	reportGenerator->generateReporte4("reporte4_estadistico.html");
+	
+};
+
+void MainFrame::setImage(const wxString& imagePath) {
 	
 	
 };
