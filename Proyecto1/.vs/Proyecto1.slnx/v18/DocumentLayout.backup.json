@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\lainz\\Desktop\\UNI\\LFyP\\LFP_1S2026_202308221\\Proyecto1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lainz\\Desktop\\UNI\\LFyP\\LFP_1S2026_202308221\\Proyecto1\\Proyecto1\\hospital.dot||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Proyecto1\\hospital.dot||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{832BA996-706D-469F-872A-ABC41F826B96}|Proyecto1\\Proyecto1.vcxproj|C:\\Users\\lainz\\Desktop\\UNI\\LFyP\\LFP_1S2026_202308221\\Proyecto1\\Proyecto1\\ReportGenerator.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{832BA996-706D-469F-872A-ABC41F826B96}|Proyecto1\\Proyecto1.vcxproj|solutionrelative:Proyecto1\\ReportGenerator.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{832BA996-706D-469F-872A-ABC41F826B96}|Proyecto1\\Proyecto1.vcxproj|C:\\Users\\lainz\\Desktop\\UNI\\LFyP\\LFP_1S2026_202308221\\Proyecto1\\Proyecto1\\ReportGenerator.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{832BA996-706D-469F-872A-ABC41F826B96}|Proyecto1\\Proyecto1.vcxproj|solutionrelative:Proyecto1\\ReportGenerator.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lainz\\Desktop\\UNI\\LFyP\\LFP_1S2026_202308221\\Proyecto1\\Proyecto1\\hospital.dot||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Proyecto1\\hospital.dot||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{832BA996-706D-469F-872A-ABC41F826B96}|Proyecto1\\Proyecto1.vcxproj|C:\\Users\\lainz\\Desktop\\UNI\\LFyP\\LFP_1S2026_202308221\\Proyecto1\\Proyecto1\\MainFrame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{832BA996-706D-469F-872A-ABC41F826B96}|Proyecto1\\Proyecto1.vcxproj|C:\\Users\\lainz\\Desktop\\UNI\\LFyP\\LFP_1S2026_202308221\\Proyecto1\\Proyecto1\\MainFrame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{832BA996-706D-469F-872A-ABC41F826B96}|Proyecto1\\Proyecto1.vcxproj|solutionrelative:Proyecto1\\MainFrame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{832BA996-706D-469F-872A-ABC41F826B96}|Proyecto1\\Proyecto1.vcxproj|C:\\Users\\lainz\\Desktop\\UNI\\LFyP\\LFP_1S2026_202308221\\Proyecto1\\Proyecto1\\ReportGenerator.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{832BA996-706D-469F-872A-ABC41F826B96}|Proyecto1\\Proyecto1.vcxproj|solutionrelative:Proyecto1\\ReportGenerator.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{832BA996-706D-469F-872A-ABC41F826B96}|Proyecto1\\Proyecto1.vcxproj|C:\\Users\\lainz\\Desktop\\UNI\\LFyP\\LFP_1S2026_202308221\\Proyecto1\\Proyecto1\\Token.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -74,24 +74,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "hospital.dot",
               "DocumentMoniker": "C:\\Users\\lainz\\Desktop\\UNI\\LFyP\\LFP_1S2026_202308221\\Proyecto1\\Proyecto1\\hospital.dot",
               "RelativeDocumentMoniker": "Proyecto1\\hospital.dot",
               "ToolTip": "C:\\Users\\lainz\\Desktop\\UNI\\LFyP\\LFP_1S2026_202308221\\Proyecto1\\Proyecto1\\hospital.dot",
               "RelativeToolTip": "Proyecto1\\hospital.dot",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002149|",
               "WhenOpened": "2026-04-03T20:00:20.842Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "MainFrame.h",
               "DocumentMoniker": "C:\\Users\\lainz\\Desktop\\UNI\\LFyP\\LFP_1S2026_202308221\\Proyecto1\\Proyecto1\\MainFrame.h",
               "RelativeDocumentMoniker": "Proyecto1\\MainFrame.h",
@@ -99,12 +99,11 @@
               "RelativeToolTip": "Proyecto1\\MainFrame.h",
               "ViewState": "AgIAABAAAAAAAAAAAAAAABcAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-03-21T21:01:08.084Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-21T21:01:08.084Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "MainFrame.cpp",
               "DocumentMoniker": "C:\\Users\\lainz\\Desktop\\UNI\\LFyP\\LFP_1S2026_202308221\\Proyecto1\\Proyecto1\\MainFrame.cpp",
               "RelativeDocumentMoniker": "Proyecto1\\MainFrame.cpp",
@@ -112,31 +111,30 @@
               "RelativeToolTip": "Proyecto1\\MainFrame.cpp",
               "ViewState": "AgIAAMAAAAAAAAAAAAAAAMcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-21T21:03:25.524Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-21T21:03:25.524Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "ReportGenerator.cpp",
               "DocumentMoniker": "C:\\Users\\lainz\\Desktop\\UNI\\LFyP\\LFP_1S2026_202308221\\Proyecto1\\Proyecto1\\ReportGenerator.cpp",
               "RelativeDocumentMoniker": "Proyecto1\\ReportGenerator.cpp",
               "ToolTip": "C:\\Users\\lainz\\Desktop\\UNI\\LFyP\\LFP_1S2026_202308221\\Proyecto1\\Proyecto1\\ReportGenerator.cpp",
               "RelativeToolTip": "Proyecto1\\ReportGenerator.cpp",
-              "ViewState": "AgIAACIAAAAA8P////8AwCsAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAGUBAAAAAAAAAAAAAHgBAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-04-02T19:03:48.468Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "ReportGenerator.h",
               "DocumentMoniker": "C:\\Users\\lainz\\Desktop\\UNI\\LFyP\\LFP_1S2026_202308221\\Proyecto1\\Proyecto1\\ReportGenerator.h",
               "RelativeDocumentMoniker": "Proyecto1\\ReportGenerator.h",
               "ToolTip": "C:\\Users\\lainz\\Desktop\\UNI\\LFyP\\LFP_1S2026_202308221\\Proyecto1\\Proyecto1\\ReportGenerator.h",
               "RelativeToolTip": "Proyecto1\\ReportGenerator.h",
-              "ViewState": "AgIAADwAAAAAAAAAAAAAAEUAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAABAZmZmZuYswEUAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-04-01T15:30:55.303Z",
               "EditorCaption": ""

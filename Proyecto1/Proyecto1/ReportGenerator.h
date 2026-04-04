@@ -54,6 +54,7 @@ public:
 
 	ReportGenerator();
     std::string Hospital = "";
+    std::string getHospitalName();
     void generateReporte1(const std::string& outputPath);
     void generateReporte2(const std::string& outputPath);
     void generateReporte3(const std::string& outputPath);

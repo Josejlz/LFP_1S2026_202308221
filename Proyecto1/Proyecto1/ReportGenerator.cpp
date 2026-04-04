@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <set>
 #include <map>
+#include <vector>
 #include <cstdlib>
 
 ReportGenerator::ReportGenerator() {
@@ -329,13 +330,15 @@ void ReportGenerator::generateReporte2(const std::string& outputPath) {
     escribirArchivo(outputPath, html.str());
 }
 
-// ── Reporte 3 — Agenda de Citas 
+// Reporte 3 — Agenda de Citas 
 
 void ReportGenerator::generateReporte3(const std::string& outputPath) {
     std::ostringstream html;
     html << htmlHeader("Agenda de Citas", R"(
-  .conflicto td { background: #f8d7da !important; }
-  .pendiente td { background: #fff3cd !important; }
+  .conflicto  td { background: #f8d7da !important; }
+  .pendiente  td { background: #fff3cd !important; }
+  .sin-fecha  td { background: #e2e3e5 !important; }
+  .badge.gris { background: #e2e3e5; color: #383d41; }
 )");
     html << R"(
 <table>
@@ -359,11 +362,19 @@ void ReportGenerator::generateReporte3(const std::string& outputPath) {
     for (const auto& c : citas) {
         std::string rowClass = "", estado = "", badgeClass = "";
 
+        bool sinFecha = c.fecha.empty() || c.hora.empty();
+
         if (c.esConflicto) {
             rowClass = "conflicto";
             estado = "&#9888; CONFLICTO"; badgeClass = "rojo";
         }
+        else if (sinFecha) {
+            // Sin fecha u hora
+            rowClass = "sin-fecha";
+            estado = "SIN PROGRAMAR"; badgeClass = "gris";
+        }
         else if (c.fecha > hoy) {
+            // fecha no confirmada
             rowClass = "pendiente";
             estado = "PENDIENTE"; badgeClass = "naranja";
         }
@@ -468,7 +479,7 @@ void ReportGenerator::generateReporte4(const std::string& outputPath) {
     kpi("Promedio de edad", bufEdad);
     html << "</div>\n";
 
-    // Sección B — Distribución por especialidad
+    // Sección B 
     html << "<h2>Sección B — Distribución de carga por especialidad</h2>\n";
     html << R"(
 <table>
@@ -513,6 +524,47 @@ void ReportGenerator::generateReporte4(const std::string& outputPath) {
     escribirArchivo(outputPath, html.str());
 };
 
+std::string ReportGenerator::getHospitalName() {
+
+    if (!(Hospital.size() > 0)) {
+        return "Hospital Desconocido";
+
+    }
+
+    std::vector<std::string> nombreHospital;
+    bool puntoAlcanzado = false;
+    for (size_t i = Hospital.size()-1; i >= 0; i--)
+    {
+        
+        if (Hospital[i]== '.')
+        {
+            puntoAlcanzado = true;
+            continue;
+        }
+
+
+        if (!puntoAlcanzado)
+        {
+            continue;
+        }
+
+        if (Hospital[i] == '/' || Hospital[i] == '\\') {
+            std::string returnName;
+            for (const auto& s : nombreHospital) {
+                returnName += s;
+            }
+            return returnName;
+        }
+        else {
+            std::string str(1, Hospital[i]);
+            nombreHospital.insert(nombreHospital.begin(), str);
+        }
+    }
+
+    return "Hospital Desconocido";
+
+}
+
 void ReportGenerator::generateGraphviz(const std::string& outputPath) {
     std::ostringstream dot;
 
@@ -521,7 +573,7 @@ void ReportGenerator::generateGraphviz(const std::string& outputPath) {
     dot << "node [shape=box, style=filled, fontname=\"Arial\"];\n";
 
     // Hospital
-    dot << "H [label=\"" << Hospital 
+    dot << "H [label=\"" << getHospitalName() 
         << "\", fillcolor=lightblue, fontcolor=black, shape=ellipse];\n";
 
     dot << "P [label=\"PACIENTES\", fillcolor=lightgreen];\n";
@@ -531,7 +583,7 @@ void ReportGenerator::generateGraphviz(const std::string& outputPath) {
 
     dot << "H -> P; H -> M; H -> C; H -> D;\n";
 
-    // Pacientes
+    // pacientes
     int i = 1;
     for (const auto& p : pacientes) {
         dot << "p" << i << " [label=\"" << p.nombre << "\", fillcolor=lightgreen];\n";
@@ -539,7 +591,7 @@ void ReportGenerator::generateGraphviz(const std::string& outputPath) {
         i++;
     }
 
-    // Médicos
+    // medicos
     i = 1;
     for (const auto& m : medicos) {
         dot << "m" << i << " [label=\"" << m.nombre << "\", fillcolor=lightcoral];\n";
@@ -547,14 +599,14 @@ void ReportGenerator::generateGraphviz(const std::string& outputPath) {
         i++;
     }
 
-    // Citas
+    // citas
     for (const auto& c : citas) {
         dot << "\"" << c.nombrePaciente << "\" -> \"" << c.nombreMedico
             << "\" [label=\"" << c.fecha << " " << c.hora 
             << "\", style=dashed];\n";
     }
 
-    // Diagnósticos
+    // diagnósticos
     i = 1;
     for (const auto& d : diagnosticos) {
         dot << "d" << i << " [label=\"" << d.condicion << "\\n"
